@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta name="google" value="notranslate">
+
+
+  <title>AKFish</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <link rel="stylesheet" href="//codepen.io/assets/reset/normalize.css">
+
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+
+  <style>
+  @charset "UTF-8";
+  @import url(https://fonts.googleapis.com/css?family=Cabin+Sketch);
+  @import url(https://fonts.googleapis.com/css?family=Raleway+Dots);
+  @import url(https://fonts.googleapis.com/css?family=Aldrich);
+  @font-face {
+    font-family: "cocat-logo";
+    src: url("//catx.me/css/cocat-logo/cocat-logo.eot");
+    src: url("//catx.me/css/cocat-logo/cocat-logo.eot?#iefix") format("embedded-opentype"), url("//catx.me/css/cocat-logo/cocat-logo.woff") format("woff"), url("//catx.me/css/cocat-logo/cocat-logo.ttf") format("truetype"), url("//catx.me/css/cocat-logo/cocat-logo.svg#cocat-logo") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+  [data-icon]:before {
+    font-family: "cocat-logo" !important;
+    content: attr(data-icon);
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  [class^="cocat-"]:before,
+  [class*=" cocat-"]:before {
+    font-family: "cocat-logo" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 2px;
+  }
+  .cocat-logo:before {
+    content: "\1f431";
+  }
+  html,
+  body {
+    position: relative;
+    height: 100%;
+    color: #F9FCFC;
+    background: #00B5EC;
+  }
+  html a,
+  body a {
+    font-weight: normal;
+    color: #F9FCFC;
+    text-decoration: none;
+  }
+  html a:link,
+  body a:link {
+    color: #F9FCFC;
+  }
+  html a:visited,
+  body a:visited {
+    color: #F9FCFC;
+  }
+  html a:hover,
+  body a:hover {
+    color: #F9FCFC;
+    text-decoration: initial;
+  }
+  html a:active,
+  body a:active {
+    color: #F9FCFC;
+  }
+  #intro {
+    padding-top: 3em;
+    text-align: center;
+    position: relative;
+  }
+  @media (min-width: 992px) {
+    #intro {
+      padding-top: 16em;
+    }
+  }
+  #intro:after {
+    display: none;
+    left: 20%;
+    right: auto;
+    bottom: -60px;
+    content: '';
+    position: absolute;
+    border-top: 60px #00B5EC solid;
+    border-left: transparent 60px solid;
+    border-right: transparent 60px solid;
+    z-index: 2;
+  }
+  #intro .inner {
+    position: relative;
+  }
+  #intro .inner > * {
+    display: inline-block;
+  }
+  #intro .logo {
+    font-size: 160px;
+    vertical-align: super;
+    position: relative;
+  }
+  @media (min-width: 992px) {
+    #intro .logo {
+      text-align: right;
+    }
+  }
+  #intro .logo .bubble {
+    position: absolute;
+    margin-left: -3px;
+    top: 40%;
+    width: 0.09em;
+    height: 0.09em;
+    border-radius: 50%;
+    border: 2px solid;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+  }
+  #intro .logo .fish {
+    text-align: center;
+  }
+  #intro .title {
+    font-family: 'Raleway Dots', cursive;
+  }
+  @media (min-width: 992px) {
+    #intro .title {
+      text-align: left;
+      border-left: 3px dashed;
+    }
+  }
+  #intro .title h1 {
+    margin: 0;
+    font-size: 64px;
+  }
+  @media (min-width: 768px) {
+    #intro .title h1 {
+      font-size: 96px;
+    }
+  }
+  @media (min-width: 992px) {
+    #intro .title h1 {
+      font-size: 128px;
+    }
+  }
+  #intro .title .slug {
+    font-size: 22px;
+    font-family: 'Cabin Sketch', cursive;
+  }
+  @media (min-width: 768px) {
+    #intro .title .slug {
+      font-size: 28px;
+    }
+  }
+  @media (min-width: 992px) {
+    #intro .title .slug {
+      font-size: 32px;
+    }
+  }
+  #jump {
+    background: #FFB300;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+    font-size: 18px;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+  }
+  @media (min-width: 768px) {
+    #jump {
+      font-size: 22px;
+    }
+  }
+  @media (min-width: 992px) {
+    #jump {
+      font-size: 28px;
+    }
+  }
+  #jump .icon,
+  #jump .info {
+    display: inline-block;
+    vertical-align: middle;
+    white-space: no-wrap;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+  }
+  @media (min-width: 992px) {
+    #jump .icon,
+    #jump .info {
+      display: inline-block;
+    }
+  }
+  #jump .icon {
+    width: 54px;
+    margin-right: 0;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+  #jump .icon i {
+    font-size: 48px;
+    line-height: 48px;
+  }
+  @media (min-width: 768px) {
+    #jump .icon {
+      text-align: center;
+    }
+  }
+  @media (min-width: 992px) {
+    #jump .icon {
+      width: 80px;
+      display: inline-block;
+      text-align: right;
+    }
+    #jump .icon i {
+      font-size: 64px;
+      line-height: 64px;
+    }
+  }
+  @media (min-width: 1200px) {
+    #jump .icon {
+      margin-right: 12px;
+    }
+  }
+  #jump .info {
+    font-family: 'Aldrich', sans-serif;
+    text-algin: center;
+    display: block;
+  }
+  @media (min-width: 768px) {
+    #jump .info {
+      text-align: center;
+    }
+  }
+  @media (min-width: 992px) {
+    #jump .info {
+      display: inline-block;
+    }
+  }
+  footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-family: 'Aldrich', sans-serif;
+    text-align: center;
+    margin-top: 1em;
+  }
+
+  </style>
+
+
+
+
+</head>
+
+<body>
+
+  <section id='intro'>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-4 logo bubble-fish'>
+          <span class="bubble"></span>
+          <span class="bubble"></span>
+          <span class="bubble"></span>
+          <span class="bubble"></span>
+          <span class="bubble"></span>
+          <span class="fish">🐟</span>
+        </div>
+        <div class='col-md-8 title'>
+          <h1>AKFish</h1>
+          <div class='slug'>Under Construction</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id='jump'>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-xs-3 col-xs-offset-3 left'>
+          <div class='link'>
+            <a href="http://catx.me">
+              <div class='icon'>
+                <i class='cocat-logo'></i>
+              </div>
+              <div class='info'>
+                <span>猫杀</span>
+                <!---
+                <div>
+                <ruby><rb>猫</rb><rp>(</rp><rt>Cat</rt><rp>)</rp></ruby>
+                <ruby><rb>杀</rb><rp>(</rp><rt>X</rt><rp>)</rp></ruby>
+              </div>
+            -->
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class='col-xs-3 right'>
+      <div class='link'>
+        <a href="http://catx.me">
+          <div class='icon'>
+            <i class="fa fa-github fa-4"></i>
+          </div>
+          <div class='info'>
+            <span>GitHub</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<footer>
+  <div class='container'>
+    © 2016 akfish
+  </div>
+</footer>
+
+
+<script>
+/*
+Bubbling Fish Physics Simulation
+
+- Based on buoyance and drag equations
+- Parameters are set manually with trial-and-error method just
+to get convencing visual effect
+*/
+var g = 0.1, // Gravity
+pi = Math.PI,
+rho = 0.0001, // "Water" density
+D = 30, // Drag coefficient
+k = 0.00001; // Random movement factor
+damp = 16; // dt damping factor
+
+function Bubble(s0) {
+  this.x = s0.x;
+  this.y = s0.y;
+  this.r = s0.r;
+  this.v_x = s0.v_x;
+  this.v_y = s0.v_y;
+  this.v_r = s0.v_r;
+  this._eval(s0, 1);
+}
+
+Bubble.prototype._eval = function(s0, dt) {
+  if (!s0) s0 = this;
+  // In my test setup (Chrome), dt is close to 16 between frames
+  // All physics parameters are acquired assuming dt == 1
+  // Diffrent browsers has diffrent dt. It has to be accounted for
+  // to get consistent bubbling speed cross browsers
+  dt /= damp;
+  this.x += s0.v_x * dt;
+  this.y += s0.v_y * dt;
+  this.a_x = this._evalDrag(s0.r, s0.v_x) + this._randA();
+  this.a_y = this._evalBuoyance(s0.r) + this._evalDrag(s0.r, s0.v_y) + this._randA();
+  this.v_x += s0.a_x * dt;
+  this.v_y += s0.a_y * dt;
+  this.r += s0.v_r * dt;
+};
+
+Bubble.prototype.update = function(dt) {
+  this._eval(this, dt);
+};
+
+Bubble.prototype._evalDrag = function(r, v) {
+  var d = v > 0 ? -1 : 1;
+  var A = pi * r * r;
+  return d * 0.5 * rho * v * v * A * D;
+};
+
+Bubble.prototype._evalBuoyance = function(r) {
+  var V = 4 * pi * r * r * r / 3;
+  return -1 * rho * V * g;
+};
+
+Bubble.prototype._randA = function() {
+  return k * Math.random();
+};
+
+function BubbleView(el, s0) {
+  this.s0 = s0;
+  this.el = el;
+  this._bubble = new Bubble(s0);
+  this._bubbling = false;
+  this._t = -1;
+  this.draw();
+}
+
+BubbleView.prototype.draw = function() {
+  var s = "scale(" + this._bubble.r + ")";
+  var tX = "translateX(" + this._bubble.x + "em)";
+  var tY = "translateY(" + this._bubble.y + "em)";
+  var trans = s + " " + tX + " " + tY;
+  this.el.style.transform = trans;
+};
+
+BubbleView.prototype.reset = function() {
+  this._bubble = new Bubble(this.s0);
+};
+
+BubbleView.prototype.start = function() {
+  this._bubbling = true;
+  requestAnimationFrame(this._tick.bind(this));
+};
+
+BubbleView.prototype.stop = function() {
+  this._bubbling = false;
+};
+
+BubbleView.prototype._tick = function(t) {
+  if (this._t < 0) {
+    this._t = t - 1;
+  }
+  var dt = t - this._t;
+  this._t = t;
+
+  this._bubble.update(dt);
+  this.draw();
+
+  if (this._bubble.y < -0.5) {
+    this.reset();
+  }
+
+  if (this._bubbling) {
+    requestAnimationFrame(this._tick.bind(this));
+  }
+};
+
+var vx_0 = 0.003;
+
+var els = document.querySelectorAll('.bubble');
+
+for (var i = 0; i < els.length; i++) {
+  var el = els[i];
+  var b = new BubbleView(el, {
+    x: 0,
+    y: 0,
+    r: Math.random(),
+    a_x: -0.01,
+    a_y: 0,
+    v_x: 0.0013,
+    v_y: -0.001,
+    v_r: 0.03
+  });
+
+  setTimeout(b.start.bind(b), Math.random() * 10);
+}
+//@ sourceURL=pen.js
+</script>
+
+
+
+
+</body>
+</html>
