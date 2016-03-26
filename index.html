@@ -8,10 +8,12 @@
   <title>AKFish</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+  <link rel="stylesheet" href="/fonts/MFYueHei.css">
   <link rel="stylesheet" href="//codepen.io/assets/reset/normalize.css">
 
   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
 
   <style>
   @charset "UTF-8";
@@ -123,7 +125,8 @@
   }
   #intro .logo .bubble {
     position: absolute;
-    margin-left: -3px;
+    left: 50%;
+    margin-left: -80px;
     top: 40%;
     width: 0.09em;
     height: 0.09em;
@@ -133,12 +136,17 @@
     transform-origin: 50% 50%;
     -webkit-transform: scale(1.4);
     transform: scale(1.4);
+    opacity: 0;
+  }
+  @media (min-width: 992px) {
+    #intro .logo .bubble {
+      left: initial;
+      text-align: right;
+      margin-left: -3px;
+    }
   }
   #intro .logo .fish {
     text-align: center;
-  }
-  #intro .logo .fish:before {
-    content: '🐟';
   }
   #intro .title {
     font-family: 'Raleway Dots', cursive;
@@ -264,6 +272,10 @@
     text-align: center;
     margin-top: 1em;
   }
+  #catx {
+    font-family: "YueHei Regular";
+    font-weight: 600;
+  }
 
   </style>
 
@@ -277,32 +289,32 @@
   <section id='intro'>
     <div class='container'>
       <div class='row'>
-        <div class='col-md-4 logo bubble-fish'>
+        <div class='col-md-4 logo bubble-fish animated fadeInRight'>
           <span class="bubble"></span>
           <span class="bubble"></span>
           <span class="bubble"></span>
           <span class="bubble"></span>
           <span class="bubble"></span>
-          <span class="fish"></span>
+          <span class="fish">🐟&#xFE0E;</span>
         </div>
-        <div class='col-md-8 title'>
+        <div class='col-md-8 title animated fadeInRight'>
           <h1>AKFish</h1>
           <div class='slug'>Under Construction</div>
         </div>
       </div>
     </div>
   </section>
-  <section id='jump'>
+  <section id='jump' class='animated slideInLeft'>
     <div class='container'>
       <div class='row'>
         <div class='col-xs-3 col-xs-offset-3 left'>
-          <div class='link'>
+          <div class='link animated fadeInUp'>
             <a href="http://catx.me">
               <div class='icon'>
                 <i class='cocat-logo'></i>
               </div>
               <div class='info'>
-                <span>猫杀</span>
+                <span id='catx'>猫杀</span>
                 <!---
                 <div>
                 <ruby><rb>猫</rb><rp>(</rp><rt>Cat</rt><rp>)</rp></ruby>
@@ -315,7 +327,7 @@
     </div>
 
     <div class='col-xs-3 right'>
-      <div class='link'>
+      <div class='link animated fadeInUp'>
         <a href="https://github.com/akfish">
           <div class='icon'>
             <i class="fa fa-github fa-4"></i>
@@ -411,6 +423,7 @@ BubbleView.prototype.draw = function() {
   var tY = "translateY(" + this._bubble.y + "em)";
   var trans = s + " " + tX + " " + tY;
   this.el.style.transform = trans;
+  this.el.style.opacity = 1;
 };
 
 BubbleView.prototype.reset = function() {
@@ -447,23 +460,39 @@ BubbleView.prototype._tick = function(t) {
 
 var vx_0 = 0.003;
 
-var els = document.querySelectorAll('.bubble');
+function startBubbling() {
 
-for (var i = 0; i < els.length; i++) {
-  var el = els[i];
-  var b = new BubbleView(el, {
-    x: 0,
-    y: 0,
-    r: Math.random(),
-    a_x: -0.01,
-    a_y: 0,
-    v_x: 0.0013,
-    v_y: -0.001,
-    v_r: 0.03
-  });
+  var els = document.querySelectorAll('.bubble');
 
-  setTimeout(b.start.bind(b), Math.random() * 10);
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    var b = new BubbleView(el, {
+      x: 0,
+      y: 0,
+      r: Math.random(),
+      a_x: -0.01,
+      a_y: 0,
+      v_x: 0.0013,
+      v_y: -0.001,
+      v_r: 0.03
+    });
+
+    setTimeout(b.start.bind(b), Math.random() * 10);
+  }
+
 }
+
+function ready(fn) {
+  if (document.readyState != 'loading'){
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+
+ready(function() {
+  setTimeout(startBubbling, 1100);
+})
 //@ sourceURL=pen.js
 </script>
 
