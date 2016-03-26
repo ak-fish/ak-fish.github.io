@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <link rel="stylesheet" href="/fonts/MFYueHei.css">
+  <link rel="stylesheet" href="/fonts/fish.css">
   <link rel="stylesheet" href="//codepen.io/assets/reset/normalize.css">
 
   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
@@ -147,6 +148,11 @@
   }
   #intro .logo .fish {
     text-align: center;
+  }
+  @media (min-width: 992px) {
+    #intro .logo .fish i {
+      vertical-align: super;
+    }
   }
   #intro .title {
     font-family: 'Raleway Dots', cursive;
@@ -295,7 +301,7 @@
           <span class="bubble"></span>
           <span class="bubble"></span>
           <span class="bubble"></span>
-          <span class="fish">🐟&#xFE0E;</span>
+          <span class="fish"><i class='icon-fish'></i></span>
         </div>
         <div class='col-md-8 title animated fadeInRight'>
           <h1>AKFish</h1>
