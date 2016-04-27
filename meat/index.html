@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>肉联厂</title>
+    <script src="dist/canvas-player.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      .container {
+        cursor: e-resize;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <script type="text/javascript">
+      function colorFilter(pixels, Color, c) {
+        var targetHsl = Color.rgbToHsl(c[0], c[1], c[2]);
+        console.time("coloring")
+        var d = pixels.data;
+        // var targetHsl = Color.rgbToHsl(255, 0, 0)
+        for (var i=0; i<d.length; i+=4) {
+          var r = d[i];
+          var g = d[i+1];
+          var b = d[i+2];
+          var v = 0.2126*r + 0.7152*g + 0.0722*b;
+          // var hsl = Color.rgbToHsl(r, g, b)
+          // console.log(v, hsl[2])
+          var rgb = Color.hslToRgb(targetHsl[0], targetHsl[1], v / 255)
+          // d[i] = d[i+1] = d[i+2] = v
+          d[i] = rgb[0]
+          d[i + 1] = rgb[1]
+          d[i + 2] = rgb[2]
+        }
+        console.timeEnd("coloring")
+      }
+
+      // var player = new CanvasPlayer(".container", {width: 1280, height: 720});
+      var player = new CanvasPlayer(".container", {width: 577, height: 1024});
+      // var targetRgb = [0, 188, 212];
+      // var targetHsl = ColorUtil.rgbToHsl(0, 188, 212)
+      // var clip1 = new CanvasClip("asset/01.jpg", {frames: 28, cols: 6, width: 1280, height: 720, fps: 15})
+      var clip_meat = new CanvasClip("asset/meat.jpg", {frames: 60, cols: 6, width: 577, height: 1024, fps: 15})
+        // .y(function(state, p) {
+        //   if (state === 'fade_in') {
+        //     return -80 * (1 - p);
+        //   } else if (state === 'fade_out') {
+        //     return 80 * p;
+        //   }
+        //   return 0;
+        // })
+        // .fadeIn(300)
+        // .fadeOut(3000)
+        // .addFilter(colorFilter, [0, 188, 212])
+        .apply();
+
+      clip_meat
+        .once("ready", function() {
+          console.log('ready')
+          var down = false
+          var dampling = 10
+          var last = 0
+          var f = 0
+          var total = clip_meat.opts.frames
+          player.canvas.addEventListener('mousedown', function (e) {
+            down = true
+            last = e.clientX
+          })
+          player.canvas.addEventListener('mouseup', function (e) {
+            down = false
+          })
+          player.canvas.addEventListener('mousemove', function (e) {
+            if (down) {
+              delta = (e.clientX - last) / dampling
+              last = e.clientX
+
+              f += delta
+              if (f < 0) f = 0
+              if (f >= total) f = total - 1
+              player.seek(clip_meat, f)
+            }
+          })
+          player.seek(clip_meat, 0)
+        })
+        .on("error", function(e) {
+          console.error(e);
+        });
+
+    </script>
+  </body>
+</html>
