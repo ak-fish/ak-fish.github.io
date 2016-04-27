@@ -77,7 +77,7 @@
               delta = (e.clientX - last) / dampling
               last = e.clientX
 
-              f += delta
+              f -= delta
               if (f < 0) f = 0
               if (f >= total) f = total - 1
               player.seek(clip_meat, f)
